@@ -11,7 +11,15 @@ class Contact extends Component {
 
     static propTypes = {
         contact: PropTypes.object.isRequired,
+        deleteClickHandler: PropTypes.func.isRequired
     };
+
+
+    onDeleteClick = () => {
+        this.props.deleteClickHandler();
+        console.log('delete');
+
+    }
 
    
    // arrow funkcija moze da pristupi state vrednosti
@@ -33,10 +41,21 @@ class Contact extends Component {
 
         return (
             <div className="card card-body mb-3">
-                <h4 onClick={() => this.setState({showContactInfo: !this.state.showContactInfo})}> 
-                    {name} 
-                    <i className="fas fa-sort" />
-                </h4>
+                <div>
+                    <h4 
+                        style={{ float:'left' }}
+                        onClick={() => this.setState({showContactInfo: !this.state.showContactInfo})}
+                    > 
+                        {name} 
+                        <i className="fas fa-sort" />
+                    </h4>
+                    <div 
+                        style={{ color:'red', cursor: 'pointer', float: 'right' }}
+                        onClick={this.onDeleteClick}
+                    >
+                            X
+                    </div>
+                </div>
 
                 {showContactInfo ? ( <ul className="list-group">
                     <li className="list-group-item">Email: {email}</li>
