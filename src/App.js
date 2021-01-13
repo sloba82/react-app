@@ -3,23 +3,27 @@ import './App.css';
 import Contacts from './components/Contacts'
 import Header from './components/Header'
 
+import { Provider } from './context'
+
 import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends Component {
   render () {
     return (
-      <div className="App">
+        <Provider>
+          <div className="App">
 
-        {/* Header is function */}
-        <Header 
-          branding = "Contact Manager"
-        />
+            {/* Header is function */}
+            <Header 
+              branding = "Contact Manager"
+            />
 
-        <div className="container">
-          <Contacts/>
+            <div className="container">
+              <Contacts/>
 
-        </div>
-      </div>
+            </div>
+          </div>
+        </Provider>
     );
   }
 }
