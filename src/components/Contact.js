@@ -5,7 +5,7 @@ import './contact.css';
 class Contact extends Component {
 
     state = {
-
+        showContactInfo: false
     };
 
 
@@ -16,24 +16,33 @@ class Contact extends Component {
    
    // arrow funkcija moze da pristupi state vrednosti
    // onShowClick = (e)  - e je event objekat
-    onShowClick = (id, e) =>  { 
-        console.log(e.target);
-        console.log(id);
+   // onShowClick = (id, e) =>  { 
+        // togluje odnosno menja showContactInfo stejt na suprotno od onog sto je trenutno
+    //    this.setState({showContactInfo: !this.state.showContactInfo});
+
+
+
+        // console.log(e.target);
+        // console.log(id);
         // console.log(this.state);
-    }
+  //  }
     
     render() {
         const {name, email, phone} = this.props.contact;
+        const { showContactInfo } = this.state;
+
         return (
             <div className="card card-body mb-3">
-                <h4 onClick={this.onShowClick.bind(this, name)}> 
+                <h4 onClick={() => this.setState({showContactInfo: !this.state.showContactInfo})}> 
                     {name} 
                     <i className="fas fa-sort" />
                 </h4>
-                <ul className="list-group">
+
+                {showContactInfo ? ( <ul className="list-group">
                     <li className="list-group-item">Email: {email}</li>
                     <li className="list-group-item">Phone: {phone}</li>
-                </ul>
+                </ul>) : null}
+
             </div>
         )
     }

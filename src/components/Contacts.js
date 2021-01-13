@@ -29,14 +29,14 @@ state = {
 
         const {contacts}  = this.state;    
         return (
-            <div>
+            <React.Fragment>
                     {contacts.map(contact => (
                         <Contact
                         key={contact.id}
                         contact={contact}
                         />
                     ))}
-            </div>
+            </React.Fragment>
         );
     }
 }
