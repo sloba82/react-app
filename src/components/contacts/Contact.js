@@ -34,8 +34,8 @@ class Contact extends Component {
                                     style={{ float:'left' }}
                                     onClick={() => this.setState({showContactInfo: !this.state.showContactInfo})}
                                 > 
-                                    {name} 
-                                    <i className="fas fa-sort" />
+                                    {name}  id: {id}
+                                    
                                 </h4>
                                 <div 
                                     style={{ color:'red', cursor: 'pointer', float: 'right' }}
