@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import './App.css';
 import Contacts from './components/contacts/Contacts'
 import Header from './components/layout/Header'
@@ -10,20 +11,22 @@ import 'bootstrap/dist/css/bootstrap.css';
 class App extends Component {
   render () {
     return (
-        <Provider>
-          <div className="App">
+        <Provider> 
+   
+            <div className="App">
 
-            {/* Header is function */}
-            <Header 
-              branding = "Contact Manager"
-            />
+              {/* Header is function */}
+              <Header 
+                branding = "Contact Manager"
+              />
 
-            <div className="container">
-              <AddContact />
-              <Contacts/>
+              <div className="container">
+                <AddContact />
+                <Contacts/>
 
+              </div>
             </div>
-          </div>
+
         </Provider>
     );
   }
