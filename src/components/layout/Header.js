@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 //functional component
 const Header = (props) => {
@@ -7,14 +8,13 @@ const Header = (props) => {
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-danger mb-3 py-0">
             <div className="container">
-                <a href="/" className="navbar-brand">{branding}</a>
+                <Link to="/" className="navbar-brand">{branding}</Link>
             </div>
             <div>
                 <ul className="navbar-nav mr-auto">
-                    <li className="nav-item"><a href="/" className="nav-link">Home</a></li>
-                    <li className="nav-item"><a href="/" className="nav-link">Test</a></li>
-
-                    
+                    <li className="nav-item"><Link to="/" className="nav-link">Home</Link></li>
+                    <li className="nav-item"><Link to="/contacts/add" className="nav-link">Add Contact</Link></li>
+                    <li className="nav-item"><Link to="/about" className="nav-link">About</Link></li>
                 </ul>
             </div>
 

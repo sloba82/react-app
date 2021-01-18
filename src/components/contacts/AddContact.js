@@ -32,6 +32,9 @@ import TextInputGroup from '../layout/TextInputGroup'
                 phone:'',
 
             });
+
+
+            this.props.history.push('/');
       
     };
 
