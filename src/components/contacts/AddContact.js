@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Consumer } from '../../context';
-import TextInputGroup from '../layout/TextInputGroup'
+import TextInputGroup from '../layout/TextInputGroup';
+import axios from 'axios';
 
  class AddContact extends Component {
 
@@ -17,13 +18,15 @@ import TextInputGroup from '../layout/TextInputGroup'
             const { name, email, phone } = this.state;
 
             const newContact = {
-                id: Math.random(),
                 name,
                 email,
                 phone
             }
     
-            dispatch({type: 'ADD_CONTACT', payload: newContact});
+            axios.post(`https://jsonplaceholder.typicode.com/users`, newContact)
+            .then(res =>  dispatch({type: 'ADD_CONTACT', payload: res.data}));
+
+          //  dispatch({type: 'ADD_CONTACT', payload: newContact});
    
             // Clear state
             this.setState({
