@@ -3,7 +3,7 @@ import { Consumer } from '../../context';
 import TextInputGroup from '../layout/TextInputGroup';
 import axios from 'axios';
 
- class AddContact extends Component {
+export default class EditContact extends Component {
 
     state = {
         name: '',
@@ -12,41 +12,46 @@ import axios from 'axios';
 
     };
 
+    async componentDidMount() {
+
+        const { id } = this.props.match.params;
+
+        const res = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`);
+
+        const contact = res.data;
+
+        console.log(contact)
+
+        this.setState({
+            name: contact.name,
+            email: contact.email,
+            phone: contact.phone
+        });
+
+    }
+
+
     onSubmit =  async (dispatch, e) => { 
         e.preventDefault();
 
-            const { name, email, phone } = this.state;
+            // const { name, email, phone } = this.state;
 
-            const newContact = {
-                name,
-                email,
-                phone
-            }
-    
-            const res = await axios.post(`https://jsonplaceholder.typicode.com/users`, newContact); 
-            dispatch({type: 'ADD_CONTACT', payload: res.data});
 
-          //  dispatch({type: 'ADD_CONTACT', payload: newContact});
-   
-            // Clear state
-            this.setState({
-                name: '',
-                email:'',
-                phone:'',
+            // this.setState({
+            //     name: '',
+            //     email:'',
+            //     phone:'',
 
-            });
+            // });
 
             this.props.history.push('/');
-      
     };
-
-
 
     onChange = e => this.setState({[e.target.name]: e.target.value});
 
     render() {
 
-        const { name, email, phone  } = this.props;
+        const { name, email, phone  } = this.state;
 
         return (
             <Consumer>
@@ -55,7 +60,7 @@ import axios from 'axios';
 
                     return (
                     <div className="card mb-3">
-                        <div className="card-body">Add Contact</div>
+                        <div className="card-body">Edit Contact</div>
                         <div className="card-body">
                             <form onSubmit={this.onSubmit.bind(this, dispatch)}>
 
@@ -86,7 +91,7 @@ import axios from 'axios';
                                     onChange={this.onChange}
                                    
                                 />
-                                <input type="submit"  value="Add" className="btn btn-outline-primary btn-block" style={{float: 'left'}}/>
+                                <input type="submit"  value="Update contact" className="btn btn-outline-primary btn-block" style={{float: 'left'}}/>
 
                             </form>
                         </div>
@@ -97,6 +102,5 @@ import axios from 'axios';
             </Consumer>
         );
     }
-}
 
-export default AddContact;
+}

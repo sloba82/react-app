@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../contact.css';
 import { Consumer } from '../../context';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class Contact extends Component {
@@ -15,9 +16,16 @@ class Contact extends Component {
 
     };
 
-    onDeleteClick = (id, dispatch ) => {
-        axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
-        .then(res =>  dispatch({type: 'DELETE_CONTACT', payload: id}));
+    onDeleteClick = async (id, dispatch ) => {
+
+        try {
+            await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+            dispatch({type: 'DELETE_CONTACT', payload: id});
+
+        } catch (e) {
+            dispatch({type: 'DELETE_CONTACT', payload: id});
+
+        }
 
       // dispatch({type: 'DELETE_CONTACT', payload: id});
     };
@@ -41,12 +49,18 @@ class Contact extends Component {
                                     {name}  id: {id}
                                     
                                 </h4>
+                                <div style={{ float: 'right' }}>
+                                <div style={{ float: 'left' }} >
+                                    <Link to={`/contacts/edit/${id}`} className="nav-link">Edit</Link>
+                                </div>
                                 <div 
-                                    style={{ color:'red', cursor: 'pointer', float: 'right' }}
+                                    style={{ color:'red', cursor: 'pointer', float: 'left' }}
                                     onClick={this.onDeleteClick.bind(this, id , dispatch)}
                                 >
-                                        X
+                                    X
                                 </div>
+                                </div>
+
                             </div>
             
                             {showContactInfo ? ( <ul className="list-group">
